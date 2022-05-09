@@ -1,0 +1,511 @@
+// 1.create a database college
+
+create database college
+use college
+
+output:Commands completed successfully.
+
+//2.create table student,Employee,Department
+
+create table Department
+
+   (
+
+     DID     int               primary key,
+
+     DName   varchar(10)       Not Null,
+
+  ) 
+
+select * from Department
+
+ output:DID   DName
+
+create table student
+ (
+
+ SID     int          primary key,
+
+ SName   varchar(30)  Not Null,
+
+ DID     int          Not Null,
+
+ DOB     date         Not Null,
+
+ Gender  char(1)      Not Null check (Gender='M' or Gender='F'),
+
+ Address varchar(30)  Null,
+
+ Mobile  varchar(10)  Null,foreign key(DID) references Department(DID)
+ )
+ 
+select * from student
+
+output: SID  SName  DID   DOB   Gender  Address  Mobile
+
+create table employee
+(
+   EID      int           primary key,
+
+   EName    varchar(40)   Not Null,
+
+   DID      int           Not Null foreign key references Department(DID),
+
+   salary   money        Not Null,
+
+   Gender   char(1)       Not Null,
+
+   City     varchar(30)   Null,
+
+   mobile   varchar(10)   Null,
+
+   Designation varchar(30) Null
+
+)
+ 
+select * from employee
+
+output: EID   EName  DID  salary  Gender  city  mobile  Designation
+
+//3.student table contains SID,SName,DID,DOB,Gender,Address,Mobile
+
+insert into student values(501,'pk',1,'19-aug-03','M','TPT','9998887776')
+
+insert into student values(502,'pm',15,'19-jan-03','F','TPT','9998887775')
+
+insert into student values(503,'moni',15,'17-mar-02','F','HYD','9968887775')
+
+insert into student values(504,'phani',12,'12-apr-04','M','HYD','9968887765')
+
+insert into student values(505,'charitha',15,'11-jul-08','F','chennai','9978887765')
+
+insert into student values(506,'chinna',2,'10-may-09','M','banglore','9978884765')
+
+insert into student values(507,'mamatha',15,'14-sep-07','F','TPT','9978384765')
+
+insert into student values(508,'harika',12,'13-oct-02','F','HYD','9278384765')
+
+insert into student values(509,'hima',4,'18-nov-01','F','chennai','9278314765')
+
+insert into student values(510,'sampurna',29,'16-dec-00','F','banglore','9258314765')
+
+select * from student 
+
+output:
+
+SID    SName     DID       DOB       Gender    Address       Mobile
+501	pk	  1	2003-08-19	M	TPT	  9998887776
+502	pm	  15	2003-01-19	F	TPT	  9998887775
+503	moni	  15	2002-03-17	F	HYD	  9968887775
+504	phani	  12	2004-04-12	M	HYD	  9968887765
+505	charitha  5	2008-07-11	F	chennai	  9978887765
+506	chinna	  2	2009-05-10	M	banglore  9978884765
+507	mamatha	  15	2007-09-14	F	TPT	  9978384765
+508	harika	  12	2002-10-13	F	HYD	  9278384765
+509	hima	  4	2001-11-18	F	chennai	  9278314765
+510	sampurna  29	2000-12-16	F	banglore  9258314765
+
+//4.employee table contains EID,EName,DID,salary,Gender,City,Mobile
+
+insert into employee values(19,'sa',2,'4000.0','F','TPT','9877898796','professor')
+
+insert into employee values(29,'ri',4,'40000.0','F','TPT','9877898678','Assisant professor')
+
+insert into employee values(37,'pa',15,'65000.0','M','TPT','9877898222','professor')
+
+insert into employee values(41,'kr',15,'74000.0','M','CD','4577898796','Assisant professor')
+
+insert into employee values(52,'sv',1,'48000.0','M','TPT','8777898796','Assisant professor')
+
+select * from employee
+
+output:
+
+EID  EName  DID    salary    Gender  city  mobile     Designation
+19   sa      2     4000.0      F     TPT  9877898796  professor
+
+29   ri      4     40000.0     F     TPT  9877898678  Assisant professor
+
+37   pa      15    65000.0     M     TPT  9877898222  professor
+
+41   kr      15    74000.0     M     CD   4577898796  Assisant professor
+
+52   sv      1     48000.0     M     TPT  8777898796  Assisant professor
+
+//5.Department table contains DID,DName
+
+ insert into Department values(15,'csse')
+
+ insert into Department values(29,'csbs')
+
+ insert into Department values(1,'ce')
+
+ insert into Department values(2,'me')
+
+ insert into Department values(3,'eie')
+
+ insert into Department values(4,'IT')
+
+ insert into Department values(5,'EEE')
+
+select * from Department
+
+output:
+
+DID    DName 
+1	ce
+2	me
+3	eie
+4	IT
+5	EEE
+12	ECE
+15	csse
+
+//6.select list of students who belong to csse department
+
+select * from student where DID =15
+
+output:
+
+SID    SName     DID       DOB       Gender    Address       Mobile
+502	pm	15	2003-01-19	F	TPT	9998887775
+503	moni	15	2002-03-17	F	HYD	9968887775
+507	mamatha	15	2007-09-14	F	TPT	9978384765
+
+//7.update address of particular student who belong to CSE department
+
+update student set address = 'banglore' where SID=505
+
+ select * from student
+
+output:
+
+SID    SName     DID       DOB       Gender    Address           Mobile
+501	pk	1	2003-08-19	M	TPT	        9998887776
+502	pm	15	2003-01-19	F	TPT	        9998887775
+503	moni	15	2002-03-17	F	HYD	        9968887775
+504	phani	12	2004-04-12	M	HYD	        9968887765
+505	charitha 5	2008-07-11	F	banglore	9978887765
+
+//8.update mobile number of particular student
+
+update student set Mobile = '9573464535' where SID = 504
+
+ select * from student
+
+output:
+ 
+SID    SName     DID       DOB       Gender    Address     Mobile
+501	pk	1	2003-08-19	M	TPT	9998887776
+502	pm	15	2003-01-19	F	TPT	9998887775
+503	moni	15	2002-03-17	F	HYD	9968887775
+504	phani	12	2004-04-12	M	HYD	9573464535
+
+//9. insert a coloumn name called bloodgroup with data type as varchar(5) and constraints as null in student and employee table
+
+alter table student add Bloodgroup varchar(15) null
+
+ select * from student
+
+output:
+
+SID    SName     DID       DOB       Gender    Address     Mobile      Bloodgroup
+501	pk	1	2003-08-19	M	TPT	9998887776	NULL
+502	pm	15	2003-01-19	F	TPT	9998887775	NULL
+503	moni	15	2002-03-17	F	HYD	9968887775	NULL
+504	phani	12	2004-04-12	M	HYD	9573464535	NULL
+
+alter table student add Bloodgroup varchar(15) null
+
+select * from employee
+
+EID  EName  DID    salary    Gender  city  mobile     Designation        Bloodgroup
+19   sa      2     4000.0      F     TPT  9877898796  professor          NULL
+
+29   ri      4     40000.0     F     TPT  9877898678  Assisant professor NULL
+
+37   pa      15    65000.0     M     TPT  9877898222  professor          NULL
+
+41   kr      15    74000.0     M     CD   4577898796  Assisant professor NULL
+
+52   sv      1     48000.0     M     TPT  8777898796  Assisant professor NULL
+
+//10.Remove records from the student table who belongs to chennai
+
+delete from student where Address = 'chennai'
+
+select * from student
+
+output:
+
+SID    SName     DID       DOB       Gender    Address     Mobile      Bloodgroup
+501	pk	1	2003-08-19	M	TPT	9998887776	NULL
+502	pm	15	2003-01-19	F	TPT	9998887775	NULL
+503	moni	15	2002-03-17	F	HYD	9968887775	NULL
+504	phani	12	2004-04-12	M	HYD	9573464535	NULL
+
+//11.update the salary to 85000 where designation is associate professor 
+
+update employee set salary = '85000.0' where Designation= 'Assisant professor'
+
+select * from employee
+
+output:
+ 
+EID  EName  DID    salary    Gender  city  mobile     Designation        Bloodgroup
+19   sa      2     4000.0      F     TPT  9877898796  professor          NULL
+
+29   ri      4     85000.0     F     TPT  9877898678  Assisant professor NULL
+
+37   pa      15    65000.0     M     TPT  9877898222  professor          NULL
+
+41   kr      15    85000.0     M     CD   4577898796  Assisant professor NULL
+
+52   sv      1     85000.0     M     TPT  8777898796  Assisant professor NULL
+
+//12.display total sum of salary of csse department
+
+select sum(salary) from employee where DID=15
+
+output: 350000.0
+
+//13.find out the employees who belongs to tpt or csse
+
+select Ename from employee where city='TPT'
+
+output:
+
+  EName    city  
+   sa       TPT  
+   ri       TPT  
+   pa       TPT     
+   sv       TPT  
+
+//14.list the employees whose salary is greater than 50,000
+
+select EName from employee whose salary>50000
+
+output:
+ 
+EID  EName  DID    salary    Gender  city  mobile     Designation        Bloodgroup
+29   ri      4     85000.0     F     TPT  9877898678  Assisant professor NULL
+
+37   pa      15    65000.0     M     TPT  9877898222  professor          NULL
+
+41   kr      15    85000.0     M     CD   4577898796  Assisant professor NULL
+
+52   sv      1     85000.0     M     TPT  8777898796  Assisant professor NULL
+
+//15.create a view from student which includessid,SName,address of csse with view name as student name
+
+create view student_csse as
+
+   select SID,Sname,Address from student where DID = 15
+
+select * from student_csse
+
+output:
+SID    SName   Address
+502	pm	TPT
+503	moni	HYD
+507	mamatha	TPT
+512	arathi	TPT
+
+//16.delete a coloumn from employee table 
+
+alter table employee drop column mobile
+
+output:
+
+EID    EName   DID       Salary  Gender     City     Bloodgroup
+19	sa	2	4000.00   F	   TPT	     professor
+37	pa	15	65000.00  M	   TPT	     professor
+
+//17.update DOB coloumn to date time and constraint as null
+
+alter table student alter column DOB datetime null
+
+select * from student
+
+output:
+
+SID    SName     DID       DOB                 Gender    Address     Mobile      Bloodgroup
+
+501	pk	1	2003-08-19 00:00:00.000	M	TPT	9998887776	NULL
+502	pm	15	2003-01-19 00:00:00.000	F	TPT	9998887775	NULL
+503	moni	15	2002-03-17 00:00:00.000	F	HYD	9968887775	NULL
+504	phani	12	2004-04-12 00:00:00.000	M	HYD	9573464535	NULL
+
+//18.update student_csse view as address=hyd whose sid is 505 and belongs to chennai
+
+update student_csse set address='hyd' where SID=505 and address='chennai' 
+
+select * from student_csse
+
+output:
+SID     SName  DID
+502	pm	TPT
+503	moni	HYD
+507	mamatha	TPT
+512	arathi	TPT
+
+//19.update department relation with section attribute without having any constraint and data type as integer
+
+alter table Department add section int 
+
+	update Department set section=2 where DID=1
+	update Department set section=3 where DID=2
+	update Department set section=4 where DID=3
+	update Department set section=2 where DID=4
+	update Department set section=3 where DID=5
+	update Department set section=4 where DID=12
+	update Department set section=2 where DID=15
+	update Department set section=1 where DID=29
+
+	select * from Department
+
+ output:
+
+DID    DName   section
+1	ce	2
+2	me	3
+3	eie	4
+4	IT	2
+5	EEE	3
+12	ECE	4
+15	csse	2
+
+//20.create a view,updateand delete it
+
+create view students_csse as 
+   select SID,SName,DID from Student where DID=15
+   update students_csse set DID=15 where SID=508
+
+drop view students_csse
+select * from students_csse
+
+output:
+
+SID    SName   DID
+502	pm	15
+503	moni	15
+507	mamatha	15
+512	arathi	15
+
+//21.display total number of students who belongs to csse
+
+select sum(salary) from employee where DID=15
+
+output:
+ 
+65000.o
+
+//22.update table employee with coloumn as age of data type int and also provide check constraint(22 to 100)
+
+alter table employee add age int null check(age>22 or age<100)
+select * from employee
+update employee set age=29  where eid=3
+update employee set age=30  where eid=4
+update employee set age=56  where eid=7
+update employee set age=39  where eid=37
+update employee set age=36  where eid=41
+
+ouput:
+EID    EName   DID       salary    Gender  city  Designation    Age
+19	sa	2	4000.00	   F	  TPT	professor	NULL
+37	pa	15	65000.00   M	  TPT	professor	39
+
+//23.find out employee who belongs to csse and age is between 30 and 40
+
+select * from employee 
+where did=15 and age>30 and age<40
+
+output:
+
+EID    EName   DID       salary    Gender  city  Designation          Age
+37	pa	15	65000.00	M	TPT	professor	39
+
+//24.find the average salary of csse department
+
+select avg(salary) from employee where DID=15
+
+output:
+
+65000.0
+
+//25.display EID,EName,DName whose salary is greater than 40000 and city as tpt
+
+select e.EID,e.EName,d.DName from Department as d join employee as e on  salary>40000.0 and City='TPT'
+
+output:
+
+EID  EName DName
+37	pa	ce
+37	pa	me
+37	pa	eie
+37	pa	IT
+37	pa	EEE
+
+//26.create a simple relation that contains SNo. with identity(1,1)'
+  27.BID with int and primary key as constraint,BName with varchar(30) and not null,quantity with int and null constraint with realtion name as BookBank
+ 28.insert 5 tuples in BookBank 
+
+create table Bookbank
+(
+   serial_no int identity(1,1),
+  BID int primary key,
+  BName   varchar(30) Not Null,
+  quantity int null
+  )
+   select * from Bookbank
+
+   insert into Bookbank values(121,'DBMS',3)
+   insert into Bookbank values(122,'DMS',2)
+   insert into Bookbank values(123,'DAA',4)
+   insert into Bookbank values(124,'ES',1)
+   insert into Bookbank values(125,'TOC',5)
+
+output:
+serial_no.  BID   BName quantity
+1	    121	  DBMS	3
+2	    122	  DMS	2
+3	    123	  DAA	4
+4	    124	  ES	1
+5	    125	  TOC	5 
+
+//29.find the total no. of employees whose age>35 in csse department
+
+select COUNT(EID) from employee where age>35 and DID=15 
+
+output:
+  1
+
+//30.display SID,SName of male students whose blood group is AB+
+
+update student set Bloodgroup='AB+' where SID=502
+     update student set Bloodgroup='B+' where SID=501
+	  update student set Bloodgroup='A+' where SID=503
+     update student set Bloodgroup='AB+' where SID=507
+	 update student set Gender='M' where SID=502
+select SID,SName from student where Gender='M' and Bloodgroup='AB+'
+
+output:
+   SID   SName
+   502	 pm
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
