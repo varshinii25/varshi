@@ -1,277 +1,38 @@
-//1.create database
-
-create database tour
-use tour
-
-//2.create table sailors
-
-create table Sailors
-(
-   SID int primary key,
-   SName varchar(30) not null,
-   Rating int not null,
-   Age int null
-)
-
-select * from Sailors
-
-insert into  Sailors values(1,'ram',4,26)
-insert into  Sailors values(2,'sam',5,28)
-insert into  Sailors values(3,'varshi',3,20)
-insert into  Sailors values(4,'varshu',6,30)
-insert into  Sailors values(5,'ramu',3,25)
-insert into  Sailors values(6,'sanju',6,19)
-insert into  Sailors values(7,'vyshu',8,21)
-insert into  Sailors values(8,'vinni',7,35)
-insert into  Sailors values(9,'ramya',6,32)
-insert into  Sailors values(10,'cherry',10,36)
-insert into  Sailors values(11,'vamsi',9,24)
-insert into  Sailors values(12,'dheeru',10,29)
-insert into  Sailors values(13,'suji',9,25)
-insert into  Sailors values(14,'samyu',7,40)
-insert into  Sailors values(15,'anju',8,42)
-
-output:
-
-SID    SName  Rating   Age
-1	ram	4	26
-2	sam	5	28
-3	varshi	3	20
-4	varshu	6	30
-5	ramu	3	25
-6	sanju	6	19
-7	vyshu	8	21
-8	vinni	7	35
-9	ramya	6	32
-10	cherry	10	36
-11	vamsi	9	24
-12	dheeru	10	29
-13	suji	9	25
-14	samyu	7	40
-15	anju	8	42
-
-
-create table Sailors1
-(
-  SID int primary key,
-   SName varchar(30) not null,
-   Rating int not null,
-   Age int null
-   )
-
-   select * from Sailors1
-
-
- insert into  Sailors1 values(1,'ram',4,26)
-insert into  Sailors1 values(2,'sam',5,28)
-insert into  Sailors1 values(6,'varsh',6,25)
-insert into  Sailors1 values(4,'varshu',6,30)
-insert into  Sailors1 values(7,'rakesh',9,25)
-
-output:
-SID    SName   Rating  Age
-1	ram	4	26
-2	sam	5	28
-4	varshu	6	30
-6	varsh	6	25
-7	rakesh	9	25
-
-//3.create table Boat
-
-create table Boat
-(
-  BID int primary key,
-  BName varchar(30) not null,
-  color varchar(15) not null
-  )
-
-  select * from Boat
-
- insert into Boat values(41,'A','red')
- insert into Boat values(42,'B','green')
- insert into Boat values(43,'C','yellow')
- insert into Boat values(44,'D','blue')
- insert into Boat values(45,'E','pink')
- insert into Boat values(46,'F','red')
- insert into Boat values(47,'G','green')
-
-
-
-output:
-BID    BName   Color
-41	A	red
-42	B	green
-43	C	yellow
-44	D	blue
-45	E	pink
-46	F	red
-47	G	green
-//4.create table Reserves 
-
-create table Reserves
- (
-  SID int foreign key references Sailors(SID),
-  BID int foreign key references Boat(BID),
-  Day date not null
-  )
-
-  select * from Reserves 
-
-insert into Reserves values(8,42,'01/02/2022')
-insert into Reserves values(9,43,'02/01/2022')
-insert into Reserves values(11,40,'03/04/2022')
-insert into Reserves values(15,36,'06/02/2022')
-insert into Reserves values(6,45,'07/03/2022')
-insert into Reserves values(4,41,'03/02/2022')
-insert into Reserves values(8,42,'02/07/2022')
-insert into Reserves values(16,33,'01/03/2022')
-insert into Reserves values(11,45,'01/08/2021')
-insert into Reserves values(9,43,'02/09/2020')
-insert into Reserves values(6,45,'07/10/2019')
-insert into Reserves values(4,41,'03/12/2018')
-insert into Reserves values(8,42,'02/11/2020')
-
-output:
-SID    BID        Day
-  8	42	2022-01-02
-11	45	2021-01-08
-9	43	2020-02-09
-6	45	2019-07-10
-4	41	2018-03-12
-8	42	2020-02-11
-11	45	2021-01-08
-9	43	2020-02-09
-6	45	2019-07-10
-4	41	2018-03-12
-8	42	2020-02-11
-11	45	2021-01-08
-9	43	2020-02-09
-6	45	2019-07-10
-4	41	2018-03-12
-8	42	2020-02-11
-11	45	2021-01-08
-9	43	2020-02-09
-6	45	2019-07-10
-4	41	2018-03-12
-8	42	2020-02-11
-
-//5.find sid,date of sailor who have reserved bid=42
-
-select S.SID,R.Day from Sailors as S join Reserves as R  on  BID=42
-
-output:
-
-SID        DAY
-1	2022-01-02
-2	2022-01-02
-3	2022-01-02
-4	2022-01-02
-5	2022-01-02
-6	2022-01-02
-7	2022-01-02
-8	2022-01-02
-9	2022-01-02
-10	2022-01-02
-11	2022-01-02
-12	2022-01-02
-
-//6. find snmae from sailors whose age>26 or rating<6
-
-select SName from Sailors where age>26 or rating<6
-
-output:
-SName
-ram
-sam
-varshi
-varshu
-ramu
-vinni
-ramya
-cherry
-dheeru
-samyu
-anju
-
-//7.find the sailors Sid,sname who are available in both sailors and sailors1
-
-
-select * from Sailors union all select * from Sailors1
-SID    SName   Rating  Age
-1	ram	4	26
-2	sam	5	28
-3	varshi	3	20
-4	varshu	6	30
-5	ramu	3	25
-6	sanju	6	19
-7	vyshu	8	21
-8	vinni	7	35
-9	ramya	6	32
-10	cherry	10	36
-
-
-//8.
-
-
-//9.find the name of Sailors who have reserved boat 103
-
-select S.SName from Sailors as S join Reserves as R on S.SID=R.SID where BID=103
-
-output:
- SName
-vinni
-vinni
-vinni
-
-//10.find the name and id of sailor who have given rating more than 7
-
-select SID,SName from Sailors where rating>7
-
-output:
-
-SID     SName
-7	vyshu
-10	cherry
-11	vamsi
-12	dheeru
-13	suji
-15	anju
-35	vyshali
-38	cherry
-42	dhara
-43	sujith
-54	vamsi
-55	dhara
-56	sujith
-58	anju
-
-
-//11.find the id of sailor who reserved boat 102
-
-
-select S.SID from Sailors as S join Reserves as R on S.SID=R.SId where BID=102
-
-output:
-
-SID
-11
-
-//12.find id of sailors who reserved boats 103 and 102
-
-
-select S.SID from Sailors as S join Reserves as R on S.SID=R.SID where BID=103 or BID=102
-
-output:
-
-SID
-8
-8
-8
-11
-
-
-
-
-
-
-  
+-----BEGIN OPENSSH PRIVATE KEY-----
+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
+-----END OPENSSH PRIVATE KEY-----
